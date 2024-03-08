@@ -10,7 +10,7 @@ from fastapi.responses import FileResponse
 
 router = APIRouter()
 
-GENERATED_DIR = os.path.join(os.path.dirname(__file__), "generated")
+GENERATED_DIR = os.path.join(os.path.dirname(os.path.dirname(__file__)), "static", "generated")
 
 # 加载模型
 pipe = StableDiffusionPipeline.from_pretrained("runwayml/stable-diffusion-v1-5")

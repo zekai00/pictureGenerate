@@ -20,6 +20,7 @@ app.add_middleware(
 
 app.include_router(image_router, prefix="/api")
 
+
 @app.get("/")
 async def read_root():
     return {"Hello": "World"}
