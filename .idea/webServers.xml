@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="8fc9aa12-28ad-45cf-82fe-ee89cc165505" name="zkai">
+        <fileTransfer accessType="SFTP" host="10.177.58.143" port="22" sshConfigId="b978e314-6ed1-4a76-bf6a-62059e71a845" sshConfig="videt@10.177.58.143:22 password">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

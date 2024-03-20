@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="06823399-8db3-48e7-9d14-14960671daaa" name="Changes" comment="修改路由以符合实际">
+      <change beforePath="$PROJECT_DIR$/backend/app/lifespan.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/app/lifespan.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/app/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/app/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/app/models/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/app/models/schemas.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/app/routers/image_router.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/app/routers/image_router.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/App.vue" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="FlaskConsoleOptions" custom-start-script="import sys&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;from flask.cli import ScriptInfo&#10;locals().update(ScriptInfo(create_app=None).load_app().make_shell_context())&#10;print(&quot;Python %s on %s\nApp: %s [%s]\nInstance: %s&quot; % (sys.version, sys.platform, app.import_name, app.env, app.instance_path))">
+    <envs>
+      <env key="FLASK_APP" value="app" />
+    </envs>
+    <option name="myCustomStartScript" value="import sys&#10;sys.path.extend([WORKING_DIR_AND_PYTHON_PATHS])&#10;from flask.cli import ScriptInfo&#10;locals().update(ScriptInfo(create_app=None).load_app().make_shell_context())&#10;print(&quot;Python %s on %s\nApp: %s [%s]\nInstance: %s&quot; % (sys.version, sys.platform, app.import_name, app.env, app.instance_path))" />
+    <option name="myEnvs">
+      <map>
+        <entry key="FLASK_APP" value="app" />
+      </map>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;zekai00&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="selectedUrlAndAccountId">
+      <UrlAndAccount>
+        <option name="accountId" value="16ecb38f-a58b-4413-94b3-2cdf4d30ddd7" />
+        <option name="url" value="https://github.com/zekai00/pictureGenerate.git" />
+      </UrlAndAccount>
+    </option>
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 8
+}</component>
+  <component name="ProjectId" id="2dPXIKUHFYfZbzXvHUSsUaHwa34" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Python.hannlp.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowPanel.toolwindow.highlight.mappings&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowPanel.toolwindow.highlight.symlinks&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowPanel.toolwindow.show.date&quot;: &quot;false&quot;,
+    &quot;WebServerToolWindowPanel.toolwindow.show.permissions&quot;: &quot;false&quot;,
+    &quot;WebServerToolWindowPanel.toolwindow.show.size&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/FDUGRAGUATE/digital image process/Paint-master/Paint-master&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;D:\\PyCharm 2023.3.4\\plugins\\javascript-impl\\jsLanguageServicesImpl\\external&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\FDUGRAGUATE\picgen\backend\app" />
+    </key>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-python-sdk-d68999036c7f-b11f5e8da5ad-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-233.14475.56" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="SvnConfiguration">
+    <configuration>C:\Users\bestl\AppData\Roaming\Subversion</configuration>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="06823399-8db3-48e7-9d14-14960671daaa" name="Changes" comment="" />
+      <created>1709910607095</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1709910607095</updated>
+      <workItem from="1709910608434" duration="133000" />
+      <workItem from="1709910750410" duration="1372000" />
+      <workItem from="1709912134698" duration="4641000" />
+      <workItem from="1709918315706" duration="3984000" />
+      <workItem from="1709922905083" duration="4194000" />
+      <workItem from="1709953454068" duration="2670000" />
+      <workItem from="1709956259207" duration="1000" />
+      <workItem from="1709959238121" duration="8468000" />
+      <workItem from="1710011181811" duration="11832000" />
+      <workItem from="1710136917501" duration="1068000" />
+      <workItem from="1710138014183" duration="18000" />
+      <workItem from="1710140243074" duration="512000" />
+      <workItem from="1710144761404" duration="1515000" />
+      <workItem from="1710152125335" duration="899000" />
+      <workItem from="1710163351797" duration="3308000" />
+      <workItem from="1710219123610" duration="138000" />
+      <workItem from="1710219340340" duration="2550000" />
+      <workItem from="1710225517741" duration="4224000" />
+      <workItem from="1710230685186" duration="15000" />
+      <workItem from="1710231533960" duration="2024000" />
+      <workItem from="1710241894351" duration="9557000" />
+      <workItem from="1710258756119" duration="2104000" />
+      <workItem from="1710321510155" duration="1140000" />
+      <workItem from="1710325774323" duration="12989000" />
+      <workItem from="1710341478514" duration="702000" />
+      <workItem from="1710343848464" duration="3996000" />
+      <workItem from="1710402102241" duration="8939000" />
+      <workItem from="1710515311480" duration="17000" />
+      <workItem from="1710515914178" duration="4000" />
+      <workItem from="1710751235059" duration="9163000" />
+      <workItem from="1710824283641" duration="27505000" />
+      <workItem from="1710905806082" duration="1968000" />
+      <workItem from="1710913171408" duration="5075000" />
+      <workItem from="1710932095130" duration="2255000" />
+      <workItem from="1710934375994" duration="1270000" />
+      <workItem from="1710945516944" duration="1802000" />
+    </task>
+    <task id="LOCAL-00001" summary="修改路由以符合实际">
+      <option name="closed" value="true" />
+      <created>1709912063845</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1709912063845</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="main" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="修改路由以符合实际" />
+    <option name="LAST_COMMIT_MESSAGE" value="修改路由以符合实际" />
+  </component>
+</project>

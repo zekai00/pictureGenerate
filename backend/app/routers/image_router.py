@@ -1,46 +1,133 @@
 # /app/routers/image_router.py
 import os
 import uuid
-from fastapi import APIRouter, HTTPException
-from models.schemas import ImageRequest, ImageResponse
+import torch
+from torch import autocast
+from fastapi import Depends, APIRouter, HTTPException, Body
+from ..schema.schemas import ImageRequest, ImageResponse, SelectImageRequest
 from diffusers import StableDiffusionPipeline
 from PIL import Image
-from fastapi.responses import FileResponse
+from datetime import datetime
+from sqlalchemy.orm import Session
+from database import SessionLocal, Base
+from database.models import Prompt, Image
+from ..translator import translate
+from ..glm4 import extend_description
 
+os.environ["CUDA_VISIBLE_DEVICES"] = "1"
+torch.backends.cudnn.benchmark = True
 
 router = APIRouter()
 
 GENERATED_DIR = os.path.join(os.path.dirname(os.path.dirname(__file__)), "static", "generated")
 
+local_model_path_v1 = (
+    "/data/huggingface/hub/models--runwayml--stable-diffusion-v1-5/snapshots/1d0c4ebf6ff58a5caecab40fa1406526bca4b5b9")
+
 # 加载模型
-pipe = StableDiffusionPipeline.from_pretrained("runwayml/stable-diffusion-v1-5")
+pipe = StableDiffusionPipeline.from_pretrained(
+    local_model_path_v1,
+    revision="fp16",
+    torch_dtype=torch.float16
+)
+pipe.to("cuda")
 
-def save_image(image):
-    # 确保 generated 文件夹存在
+
+def get_db():
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()
+
+
+def save_image_to_db(db: Session, file_path: str, text: str, translated_text: str, r_prompt: str):
+    new_prompt = Prompt(text=text, translated_text=translated_text, real_prompt=r_prompt)
+    db.add(new_prompt)
+    db.commit()
+    db.refresh(new_prompt)
+
+    new_image = Image(file_path=file_path, prompt_id=new_prompt.id, creation_time=datetime.now())
+    db.add(new_image)
+    db.commit()
+    db.refresh(new_image)
+
+    return new_image
+
+
+def save_image(image, _prompt):
     os.makedirs(GENERATED_DIR, exist_ok=True)
-
-    # 生成唯一的文件名
-    filename = f"{uuid.uuid4()}.png"
+    prompt_slug = _prompt.replace(" ", "_")[:10]
+    filename = f"{prompt_slug}_{str(uuid.uuid4())[:8]}.png"
     image_path = os.path.join(GENERATED_DIR, filename)
-
-    # 保存图像
     image.save(image_path)
-
     return filename
 
+
 @router.post("/generate-image/", response_model=ImageResponse)
-async def generate_image(request: ImageRequest):
-    # 获取用户输入的描述
+async def generate_image(request: ImageRequest, db: Session = Depends(get_db)):
     description = request.description
     print(f"Received description: {description}")
+    images_info = []  # 用于保存图片信息的列表
 
-    # 使用模型生成图像
-    image = pipe(description).images[0]
-    
-    # 保存生成的图像并获取保存路径 (下一步会讨论保存路径)
-    filename = save_image(image)
+    # 先扩写古诗
+    description = extend_description(description)
+    print(f"Extended description: {description}")
 
-    # 示例URL，这里应替换为调用图像生成逻辑后的图像URL
-    # image_url = "http://127.0.0.1:8000/static/pic1.png"
-    image_url = f"http://127.0.0.1:8000/static/generated/{filename}"
-    return ImageResponse(url=image_url, description=request.description)
+    translated_description = translate(description)
+    print(f"Translated description: {translated_description}")
+
+    prompt = f"A painting of{translated_description}"
+    print(f"Prompt for image generation: {prompt}")
+
+    with autocast("cuda"):
+        for _ in range(2):
+            image = pipe(prompt).images[0]
+            filename = save_image(image, translated_description)
+            file_path = os.path.join(GENERATED_DIR, filename)
+            image_record = save_image_to_db(db, file_path, description, translated_description, prompt)
+
+            image_url = f"http://10.177.58.143:8000/static/generated/{filename}"
+            images_info.append({
+                "id": image_record.id,  # 从数据库记录中获取图片ID
+                "url": image_url  # 构建图片URL
+            })
+
+    return ImageResponse(images=images_info, description=request.description)  # 修改响应结构以包含图片ID和URL
+
+# @router.post("/generate-image/", response_model=ImageResponse)
+# async def generate_image(request: ImageRequest, db: Session = Depends(get_db)):
+#     description = request.description
+#     print(f"Received description: {description}")
+#     images = []
+#     filenames = []
+#     # 翻译描述到英文
+#     translated_description = translate(description)
+#     print(f"Translated description: {translated_description}")
+#
+#     with autocast("cuda"):
+#         for _ in range(2):
+#             image = pipe(description).images[0]
+#             filename = save_image(image, translated_description)
+#             images.append(image)
+#             filenames.append(filename)
+#
+#             file_path = os.path.join(GENERATED_DIR, filename)
+#             save_image_to_db(db, file_path, description, translated_description, translated_description)
+#
+#     image_urls = [f"http://10.177.58.143:8000/static/generated/{filename}" for filename in filenames]
+#     return ImageResponse(urls=image_urls, description=request.description)
+
+
+@router.post("/select-image/")
+async def select_image(request: SelectImageRequest, db: Session = Depends(get_db)):
+    # 在数据库中查找对应的图片记录
+    print(f'Select.image_id = {request.image_id}')
+    img_to_update = db.query(Image).filter(Image.id == request.image_id).first()
+    print(f'img_to_update = {img_to_update}')
+    if not img_to_update:
+        raise HTTPException(status_code=404, detail="Image not found")
+    # 更新selected字段为True
+    img_to_update.selected = True
+    db.commit()
+    return {"message": "Image selected successfully"}
