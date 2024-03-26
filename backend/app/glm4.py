@@ -1,7 +1,7 @@
 import time
 from zhipuai import ZhipuAI
 
-API_KEY = "a608059a164a09863479fb4d55b4d5d5.TkqSAVJ4F72XE9Pl"
+API_KEY = ""
 
 
 def extend_description(description: str) -> str:
