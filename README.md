@@ -1,5 +1,3 @@
-本平台的主要功能为：用户可以输入一首古诗，得到两幅由古诗生成的图像。
-
 python版本为3.10.13。部分库要求写在requirements.txt中了。
 
 前端在frontend文件夹下npm run serve，后端在backend文件夹下uvicorn app.main:app --host 0.0.0.0 --reload即可启动。
