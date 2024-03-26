@@ -7,8 +7,8 @@ import random
 
 BAIDU_TRANSLATE_URL = "https://fanyi-api.baidu.com/api/trans/vip/translate"
 
-APP_ID = "20240310001988802"
-API_KEY = "0jGYNRechAgN0JDEYvLL"
+APP_ID = ""
+API_KEY = ""
 
 
 def make_md5(s, encoding='utf-8'):
