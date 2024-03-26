@@ -22,7 +22,7 @@ app.mount("/static", StaticFiles(directory="/data/picgen/backend/app/static"), n
 # 添加CORS中间件
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # 允许所有来源，出于安全考虑，应当更具体地指定允许的来源
+    allow_origins=["*"],  # 允许所有来源，如果出于安全考虑，可以更具体地指定允许的来源
     allow_credentials=True,
     allow_methods=["*"],  # 允许所有方法
     allow_headers=["*"],  # 允许所有头
