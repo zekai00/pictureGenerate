@@ -6,7 +6,7 @@ API_KEY = "a608059a164a09863479fb4d55b4d5d5.TkqSAVJ4F72XE9Pl"
 
 def extend_description(description: str) -> str:
     client = ZhipuAI(api_key=API_KEY)
-    myprompt = f'请根据这句古诗“{description}”，创作一个现代汉语描述，这个描述应该能够用来描绘一幅画，这幅画应该展现诗中的意境和情感，就像是将诗中的景象转化成了可视化的艺术作品。五十个字左右。'
+    myprompt = f'请根据这句古诗“{description}”，给我二到四个现代汉语的短句来描述诗中关键意象，用逗号分割，我要用来绘制一副国画。只用给我几个词就好，不要排序，不要任何解释性的、描述性的话或者注释。'
     response = client.chat.asyncCompletions.create(
         model="glm-4",  # 使用指定的模型
         messages=[

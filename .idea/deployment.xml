@@ -2,6 +2,13 @@
 <project version="4">
   <component name="PublishConfigData" serverName="zkai" remoteFilesAllowedToDisappearOnAutoupload="false">
     <serverData>
+      <paths name="myz">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
       <paths name="zkai">
         <serverdata>
           <mappings>

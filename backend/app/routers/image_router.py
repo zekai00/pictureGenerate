@@ -32,6 +32,9 @@ pipe = StableDiffusionPipeline.from_pretrained(
 )
 pipe.to("cuda")
 
+lora_weights_path = "/data/picgen/caise.safetensors"
+pipe.load_lora_weights(lora_weights_path)
+
 
 def get_db():
     db = SessionLocal()
@@ -57,7 +60,7 @@ def save_image_to_db(db: Session, file_path: str, text: str, translated_text: st
 
 def save_image(image, _prompt):
     os.makedirs(GENERATED_DIR, exist_ok=True)
-    prompt_slug = _prompt.replace(" ", "_")[:10]
+    prompt_slug = _prompt.replace(" ", "_")[:12]
     filename = f"{prompt_slug}_{str(uuid.uuid4())[:8]}.png"
     image_path = os.path.join(GENERATED_DIR, filename)
     image.save(image_path)
@@ -77,12 +80,17 @@ async def generate_image(request: ImageRequest, db: Session = Depends(get_db)):
     translated_description = translate(description)
     print(f"Translated description: {translated_description}")
 
-    prompt = f"A painting of{translated_description}"
+    prompt = f"{translated_description}, Chinese landscape, masterpiece, high details, best quality, 4k,"
     print(f"Prompt for image generation: {prompt}")
 
     with autocast("cuda"):
         for _ in range(2):
-            image = pipe(prompt).images[0]
+            image = pipe(
+                width=768, height=432,
+                prompt=prompt,
+                negative_prompt="worst quality, low quality, watermark, calligraphy",
+                # guidance_scale=0.7,
+            ).images[0]
             filename = save_image(image, translated_description)
             file_path = os.path.join(GENERATED_DIR, filename)
             image_record = save_image_to_db(db, file_path, description, translated_description, prompt)
@@ -94,6 +102,7 @@ async def generate_image(request: ImageRequest, db: Session = Depends(get_db)):
             })
 
     return ImageResponse(images=images_info, description=request.description)  # 修改响应结构以包含图片ID和URL
+
 
 # @router.post("/generate-image/", response_model=ImageResponse)
 # async def generate_image(request: ImageRequest, db: Session = Depends(get_db)):

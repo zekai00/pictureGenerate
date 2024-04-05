@@ -7,6 +7,7 @@ from .translator import translate
 from database import create_tables
 import os
 print(os.getcwd())
+os.environ["CUDA_VISIBLE_DEVICES"] = "1"
 import sys
 from pathlib import Path
 # 获取 backend 目录的路径
